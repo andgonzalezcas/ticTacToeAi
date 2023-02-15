@@ -35,12 +35,10 @@ const Board = () => {
   const renderSquare = (i: number) => {
     return <Square value={squares[i]} handleClick={() => handleClick(i)} />;
   }
-
-  const status = `Next player: ${moveSymbol}`;
-
+  
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <p className="m-3">{status}</p>
+      <p className="m-3">{`Next player: ${moveSymbol}`}</p>
       <div className="grid grid-cols-3 gap-1">
         {squares && squares.map((square: any, index: number) => {
           return (<div key={index}>{renderSquare(index)}</div>)

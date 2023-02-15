@@ -12,6 +12,8 @@ export class TicTacToe {
   handleMove(i: number, icon: string = '') { this.squares[i] = icon }
 
   handleGameOver() {
+    if (this.isFull()) return 'Empate'
+
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -30,5 +32,19 @@ export class TicTacToe {
       }
     }
     return '';
+  }
+
+  isFull() {
+    let returnable = true
+
+    console.log(this.squares)
+
+    this.squares.map(square => {
+      if (typeof (square) !== 'string') {
+        console.log('entre')
+        returnable = false
+      }
+    })
+    return returnable
   }
 }
