@@ -54,6 +54,7 @@ const Board = () => {
     setSquares(game.getSquares())
     setMoveSymbol(game.getMoveSymbol())
     setFinishMessage('')
+    setAiTurn(false)
   }
 
   const renderSquare = (i: number) => {
