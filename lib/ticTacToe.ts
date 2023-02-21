@@ -1,19 +1,34 @@
+type playerIconsProps = ('❤️' | '😒')
+
+const playerIcons: playerIconsProps[] = ['❤️', '😒']
+
 export class TicTacToe {
   squares: any[]
+  moveSymbol: playerIconsProps
 
-  constructor() {
+  constructor(moveSymbol?: playerIconsProps) {
     this.squares = Array(9).fill(null)
+    this.moveSymbol = moveSymbol ? moveSymbol : playerIcons[Math.round(Math.random())]
   }
 
   // getters
   getSquares() { return this.squares }
+  getMoveSymbol() { return this.moveSymbol }
 
   // handlers
-  handleMove(i: number, icon: string = '') { this.squares[i] = icon }
+  handleMove(i: number) {
+    this.squares[i] = this.moveSymbol
+    this.moveSymbol === playerIcons[0]
+      ? this.moveSymbol = playerIcons[1]
+      : this.moveSymbol = playerIcons[0]
+  }
+
+  handleReset() {
+    this.squares = Array(9).fill(null)
+    this.moveSymbol = playerIcons[Math.round(Math.random())]
+  }
 
   handleGameOver() {
-    if (this.isFull()) return 'Empate'
-
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -31,17 +46,17 @@ export class TicTacToe {
         return `Gano: ${this.squares[a]}`
       }
     }
+
+    if (this.isFull()) return 'Empate'
+
     return '';
   }
 
   isFull() {
     let returnable = true
 
-    console.log(this.squares)
-
     this.squares.map(square => {
       if (typeof (square) !== 'string') {
-        console.log('entre')
         returnable = false
       }
     })
